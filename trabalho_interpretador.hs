@@ -186,3 +186,30 @@ fatorial = (Seq (Atrib (Var "y") (Num 1))
                 (While (Not (Igual (Var "x") (Num 1)))
                        (Seq (Atrib (Var "y") (Mult (Var "y") (Var "x")))
                             (Atrib (Var "x") (Sub (Var "x") (Num 1))))))
+
+
+sigmaAluno :: Memoria
+sigmaAluno = [("nota1",4), ("nota2",2), ("nota3",2), ("notafinal",0), ("passou", 0)]
+
+-- Programa calcula a soma de 3 notas, salva o resultado
+-- na memória e atribui 0 se o aluno não passou e 1 se 
+-- ele passou na variável "passou"
+alunoPassou :: C 
+alunoPassou = (Seq (Atrib (Var "notafinal") (Soma (Var "nota1") 
+                                                  (Soma (Var "nota2") 
+                                                        (Var "nota3")))) 
+                   (If (Leq (Var "notafinal") (Num 7)) 
+                       (Atrib (Var "passou") (Num 0)) 
+                       (Atrib (Var "passou") (Num 1))))
+
+
+-- Progrma calcula a potencia "z" de um numero "x".
+sigmaPow :: Memoria
+sigmaPow = [("w",0), ("x",2), ("y",3), ("z",4)]
+
+
+pow :: C 
+pow = (Seq (Atrib (Var "w") (Var "x"))
+           (DoWhile (Seq ((Atrib (Var "w") (Mult (Var "w") (Var "x"))))
+                         (Atrib (Var "y") (Soma (Var "y") (Num 1))))
+                    (Leq (Var "y") (Var "z"))))
